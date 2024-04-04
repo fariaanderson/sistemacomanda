@@ -1,63 +1,50 @@
 const prompt = require ('prompt-sync') ( );
 
-let conta = {
-    pessoaMesa: [] , //Quantidade de pessoas total da mesa
-    totalConta: [] , //Total geral da conta sem acrescimos e descontos
-    metodoPagamento: [] , //Métodos de efetuar o pagamento
-    taxaDesconto: [] , //Digite a taxa de desconto que será aplicado no totao da conta conforme o pagamento Pix ou Dinheiro
-    totalComDesconto: [], //Total com desconto aplicado
-    divideTotal: [], //Divide o total pelas pessoas
-}
+let pessoaMesa = parseInt(prompt("Insira a quantidade de pessoas na mesa! :"));
+let totalConta = parseFloat(prompt("Insira o total da conta! :"));
+let metodoPagamento = parseInt(prompt("Insira o metodo de pagamento (1 - Pix / 2 - Dinheiro / 3 - Cartão) : "));
 
-conta.pessoaMesa = parseInt(prompt("Digite a quantidade de pessoas na mesa: "));
-conta.totalConta = parseFloat(prompt("Digite o total da conta: "));
 
-function metodoPagamento(){
-    conta.metodoPagamento = parseInt(prompt("Digite o método de pagamento >> 1: Pix / 2: Dinheiro / 3: Cartão "));
+let totalComDesconto = (totalConta-(totalConta*10)/100);
+//console.log(totalComDesconto.toFixed(2));
 
-    switch(conta.metodoPagamento){
-        case 1:
-             conta.totalComDesconto = ((conta.totalConta/conta.pessoaMesa)*0.9);
-             console.log(`O valor total da conta é:   ${conta.totalComDesconto.toFixed(2)}`);
-        break
-        case 2:
-            conta.totalComDesconto = ((conta.totalConta/conta.pessoaMesa)*0.9);
-            console.log(`O valor total da conta é:   ${conta.totalComDesconto.toFixed(2)}`);
-        break
-        case 3:
-            console.log(`O valor da conta para pagamento em cartão é ${conta.totalConta/conta.pessoaMesa.toFixed(2)}`);
-    
-        default:
-             console.log("O Total da conta é: " + conta.totalConta.toFixed(2));
-        break
-}
+switch(metodoPagamento){
+    case 1:
+        console.log(`O valor total da conta é: R$ ${totalComDesconto.toFixed(2)} `);
+    break
+    case 2:
+        console.log(`O valor total da conta é: R$ ${totalComDesconto.toFixed(2)} `);
+    break
+    case 3:
+        console.log(`O valor total da conta é: R$ ${totalConta.toFixed(2)} `);
+    // default:
+    //     console.log("Digite um valor válido!!!")
 
 }
 
-conta.divideTotal = parseInt(prompt("Deseja dividir a conta? 1 = Sim / 2 = Nao "));
+let divideConta = parseInt(prompt("Deseja dividir o total da conta? 1 = Sim  /  2 = Não : "));
 
-if (conta.divideTotal === 1 ){ 
-    for ( let i=0;i<conta.pessoaMesa;i++){
-metodoPagamento()}
-    } else {
-        conta.metodoPagamento = parseInt(prompt("Digite o método de pagamento >> 1: Pix / 2: Dinheiro / 3: Cartão "));
+if (divideConta == 1 && metodoPagamento == 1 || metodoPagamento == 2){
+    console.log(`O total para cada integrante da mesa pagar é de: " R$ ${totalComDesconto/pessoaMesa}`);
 
-        switch(conta.metodoPagamento){
-            case 1:
-                 conta.totalComDesconto = (conta.totalConta*0.9);
-                 console.log(`O valor total da conta é:   ${conta.totalComDesconto.toFixed(2)}`);
-            break
-            case 2:
-                conta.totalComDesconto = (conta.totalConta*0.9);
-                console.log(`O valor total da conta é:   ${conta.totalComDesconto.toFixed(2)}`);
-            break
-            case 3:
-                console.log(`O valor da conta para pagamento em cartão é ${conta.totalConta.toFixed(2)}`);
-        
-            default:
-                 console.log("Opção Inválida");
-            break
+}else if (divideConta == 1 && metodoPagamento == 3){
+    console.log(`O total para cada integrante da mesa pagar é de: " R$ ${totalConta/pessoaMesa}`);
 
-    }
+}else if (divideConta == 2 && metodoPagamento == 1 || metodoPagamento == 2){
+    console.log(`O total da mesa a pagar é de: " R$ ${totalComDesconto}`);
 
-    }
+}else {(divideConta == 2 && metodoPagamento == 3)
+    console.log(`O total da mesa a pagar é de: " R$ ${totalConta}`);
+}
+
+//Calcula Gorjeta
+
+let calculaGorjeta = [10,20,30,40,50];
+
+
+
+
+
+
+
+// console.log(calculaGorjeta);
